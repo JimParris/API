@@ -1,6 +1,6 @@
 Clear-Host
 
-@"
+@'
 GetDeviceFilteredPrinterInfo-Prompted.ps1
 
 This script outputs printer information for all devices matching the given
@@ -16,14 +16,12 @@ Created by:	Jon Czerwinski, Cohn Consulting Corporation
 Date:		December 16, 2013
 Version:	1.0
 
-"@
-
+'@
 
 #
 # Determine where the N-Central server is
 #
-$serverHost = Read-Host "Enter the fqdn of the N-Central Server "
-
+$serverHost = Read-Host 'Enter the fqdn of the N-Central Server '
 
 #
 # Generate a pseudo-unique namespace to use with the New-WebServiceProxy and 
@@ -44,23 +42,21 @@ $serverHost = Read-Host "Enter the fqdn of the N-Central Server "
 # and I find it more readable to define our 'dynamic' types here and use the typenames
 # in variables when calling New-Object.
 #
-$NWSNameSpace = "NAble" + ([guid]::NewGuid()).ToString().Substring(25)
+$NWSNameSpace = 'NAble' + ([guid]::NewGuid()).ToString().Substring(25)
 $KeyPairType = "$NWSNameSpace.T_KeyPair"
 $KeyValueType = "$NWSNameSpace.T_KeyValue"
-
 
 #
 # Create PrinterData type to hold printer name and port
 #
-Add-Type -TypeDefinition @"
+Add-Type -TypeDefinition @'
 public class PrinterData {
 	public string CustomerName;
 	public string ComputerName;
 	public string PrinterName;
 	public string PrinterPort;
 	}
-"@
-
+'@
 
 #
 # Get credentials
@@ -70,29 +66,26 @@ public class PrinterData {
 # We still have to extract a plain-text version of the password to pass to
 # the API call.
 #
-$username = Read-Host "Enter N-Central user id "
-$secpasswd = Read-Host "Enter password " -AsSecureString
+$username = Read-Host 'Enter N-Central user id '
+$secpasswd = Read-Host 'Enter password ' -AsSecureString
 
 $creds = New-Object System.Management.Automation.PSCredential ("\$username", $secpasswd)
 $password = $creds.GetNetworkCredential().Password
 
-$bindingURL = "https://" + $serverHost + "/dms/services/ServerEI?wsdl"
-$nws = New-Webserviceproxy $bindingURL -credential $creds -Namespace ($NWSNameSpace)
-
+$bindingURL = 'https://' + $serverHost + '/dms/services/ServerEI?wsdl'
+$nws = New-WebServiceProxy $bindingURL -Credential $creds -Namespace ($NWSNameSpace)
 
 #
 # Get the filter name to use
 #
 Write-Host
-$FilterName = (Read-Host "Enter the exact filter name ").Trim()
-
+$FilterName = (Read-Host 'Enter the exact filter name ').Trim()
 
 #
 # Select the output file
 #
 Write-Host
-$CSVFile = (Read-Host "Enter the CSV output filename ").Trim()
-
+$CSVFile = (Read-Host 'Enter the CSV output filename ').Trim()
 
 #
 # Set up and execute the query
@@ -106,11 +99,10 @@ $KeyPairs += $KeyPair
 
 $KeyPair = New-Object -TypeName $KeyValueType
 $KeyPair.Key = 'InformationCategoriesInclusion'
-$KeyPair.Value = @("asset.customer", "asset.device", "asset.printer")
+$KeyPair.Value = @('asset.customer', 'asset.device', 'asset.printer')
 $KeyPairs += $KeyPair
 
-$rc = $nws.DeviceAssetInfoExport2("0.0", $username, $password, $KeyPairs)
-
+$rc = $nws.DeviceAssetInfoExport2('0.0', $username, $password, $KeyPairs)
 
 #
 # Set up the printers array, then populate with the printer name and port
@@ -119,7 +111,9 @@ $Printers = @()
 
 foreach ($device in $rc) {
 	$DeviceAssetInfo = @{}
-	foreach ($item in $device.Info) {$DeviceAssetInfo[$item.key] = $item.Value}
+	foreach ($item in $device.Info) {
+		$DeviceAssetInfo[$item.key] = $item.Value
+ }
 	
 	$CustomerName = $DeviceAssetInfo['asset.customer.customername']
 	$ComputerName = $DeviceAssetInfo['asset.device.longname']
@@ -134,13 +128,13 @@ foreach ($device in $rc) {
 		
 		$Script:Printers += $Printer
 		$index ++
-		}
+	}
 
 	If ($index -gt 0) {
 		Write-Host "Found $index printers on $CustomerName - $ComputerName"
-		}
+	}
 	
 	Remove-Variable DeviceAssetInfo
-	}
+}
 	
 $Printers | Export-Csv -Path $CSVFile -NoTypeInformation -Force
