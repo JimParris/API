@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Functions\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\IntuneEnhancedInventory\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Media\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Misc-Powershell-Scripts\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Modules\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Reference\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts-Dev\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Toolkits\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\TSQL\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Functions\" diff)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Functions\" log --oneline -5)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Modules\" diff)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Modules\" log --oneline -5)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts-Dev\" diff)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts-Dev\" log --oneline -5)"
+    ]
+  }
+}
