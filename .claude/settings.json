@@ -16,7 +16,14 @@
       "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Modules\" diff)",
       "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Modules\" log --oneline -5)",
       "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts-Dev\" diff)",
-      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts-Dev\" log --oneline -5)"
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts-Dev\" log --oneline -5)",
+      "Read(//c/Program Files/WindowsPowerShell/Modules/CmnTroubleShootingTools/**)",
+      "PowerShell(Import-Module \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Scripts-Dev\\\\CmnTools\\\\CmnTools.psm1\" -Force; $out = Get-Service | Select-Object -First 5 | ConvertTo-CmnPsd1 -NoPreamble $true; Write-Output $out)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\AutopilotBranding\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\CloudLAPSPortal\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\ComputerRename\" status --short)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\API\" log --oneline -5)",
+      "PowerShell(git -C \"d:\\\\Repos\\\\Github\\\\JimParris\\\\Toolkits\" log --oneline -5)"
     ]
   }
 }
